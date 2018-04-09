@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: fp-apigateway
+  cloud:
+    config:
+      label: master # optional
+      uri: http://fp-cloudconfig:8888
+      failFast: true
+      retry:
+        maxAttempts: 20

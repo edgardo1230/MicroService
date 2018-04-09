@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: fp-cloudconfig
+  cloud:
+    config:
+      server:
+        git:
+          uri:  https://github.com/edgardo1230/FPCloudConfig
+          searchPaths: fp-cloudconfig
+          
+server:
+  port: 8888
+  
+endpoints.health.sensitive: false
+  

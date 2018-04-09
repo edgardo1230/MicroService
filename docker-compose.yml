@@ -1,0 +1,27 @@
+version: '3'
+services:
+   fp-cloudconfig:
+    image: focalpoint/fp-cloudconfig
+    ports:
+     - "8888:8888"
+   fp-eureka:
+    image: focalpoint/fp-eureka
+    ports:
+     - "1111:1111"
+    depends_on:
+     - fp-cloudconfig
+   fp-apigateway:
+    image: focalpoint/fp-apigateway
+    depends_on:
+     - fp-eureka
+    ports:
+     - "8181:8181"
+   fp-service-admin:
+    image: focalpoint/fp-service-admin
+    depends_on:
+     - fp-eureka
+    deploy:
+      mode: replicated
+      replicas: 3
+   
+     
