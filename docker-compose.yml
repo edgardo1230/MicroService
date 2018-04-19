@@ -10,18 +10,19 @@ services:
      - "1111:1111"
     depends_on:
      - fp-cloudconfig
+    command: ["./wait-for-it.sh", "fp-cloudconfig:8888", "--", "python", "app.py"]
    fp-apigateway:
     image: focalpoint/fp-apigateway
-    depends_on:
-     - fp-eureka
     ports:
      - "8181:8181"
-   fp-service-admin:
-    image: focalpoint/fp-service-admin
     depends_on:
      - fp-eureka
-    deploy:
-      mode: replicated
+    command: ["./wait-for-it.sh", "fp-eureka:1111", "--", "python", "app.py"]
+   fp-service-admin:
+    image: focalpoint/fp-service-admin
+    mode: replicated
       replicas: 3
-   
-     
+    depends_on:
+     - fp-eureka
+    command: ["./wait-for-it.sh", "fp-eureka:1111", "--", "python", "app.py"]
+    deploy:
